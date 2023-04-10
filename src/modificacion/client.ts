@@ -1,16 +1,11 @@
-import { connect } from 'net';
-import { MessageEventEmitterClient } from './eventEmitterClient.js';
+import net from 'net';
 
-const client = new MessageEventEmitterClient(connect({port: 60300}));
 
-client.on('message', (message) => {
-  if (message.type === 'watch') {
-    console.log(`Connection established: watching file ${message.file}`);
-  } else if (message.type === 'change') {
-    console.log('File has been modified.');
-    console.log(`Previous size: ${message.prevSize}`);
-    console.log(`Current size: ${message.currSize}`);
-  } else {
-    console.log(`Message type ${message.type} is not valid`);
-  }
+const client = net.connect({port: 60300}, () => {
+  const comando = JSON.stringify({'comando': process.argv[2], 'argumentos': [process.argv[3], process.argv[process.argv.length - 1]]});
+  client.write(comando);
+  client.on('data', (data) => {
+    console.log(data.toString());
+  });
+  client.end();
 });

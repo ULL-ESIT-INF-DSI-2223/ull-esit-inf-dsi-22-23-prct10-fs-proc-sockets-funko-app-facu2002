@@ -1,27 +1,20 @@
 import net from 'net';
-import {watchFile} from 'fs';
+import {spawn} from 'child_process';
 
-if (process.argv.length !== 3) {
-  console.log('Please, provide a filename.');
-} else {
-  const fileName = process.argv[2];
 
-  net.createServer((connection) => {
-    console.log('A client has connected.');
-
-    connection.write(JSON.stringify({'type': 'watch', 'file': fileName}) +
-      '\n');
-
-    watchFile(fileName, (curr, prev) => {
-      connection.write(JSON.stringify({
-        'type': 'change', 'prevSize': prev.size, 'currSize': curr.size}) +
-         '\n');
-    });
-
-    connection.on('close', () => {
-      console.log('A client has disconnected.');
-    });
-  }).listen(60300, () => {
-    console.log('Waiting for clients to connect.');
+net.createServer({allowHalfOpen: true}, (connection) => {
+  let wholeData = '';
+  connection.on('data', (dataChunk) => {
+    wholeData += dataChunk;
   });
-}
+
+  connection.on('end', () => {
+    const comando = JSON.parse(wholeData.toString());
+    const salida = spawn(comando.comando, comando.argumentos);
+    salida.stdout.pipe(process.stdout);
+    // connection.write();
+  });
+
+}).listen(60300, () => {
+  console.log('Waiting for clients to connect.');
+});
