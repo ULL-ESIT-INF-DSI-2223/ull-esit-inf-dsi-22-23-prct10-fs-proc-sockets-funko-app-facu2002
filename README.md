@@ -82,6 +82,7 @@ Ahora vamos con el siguiente subapartado, realizar el mismo programa pero sin el
 11   }
 ```
 
+
 En este caso, lo que se hace es crear un proceso hijo, en este caso, el comando wc, que se encarga de contar las líneas de un fichero, el parámetro -l indica que se quieren contar las líneas, y el parámetro nombreFichero indica el fichero del que se quieren contar las líneas. A continuación se crea una variable wcSalida, que se encargará de almacenar la salida del proceso hijo, es decir, el número de líneas del fichero. Para ello, se utiliza el método on, que se encarga de añadir un manejador a un evento, en este caso, el evento data, que se ejecutará cuando el proceso hijo envíe datos al proceso padre. Una vez tenemos toda la información en la variable wcSalida, llamamos al método on nuevamente pero esta vez para el evento close, que se ejecutará cuando el proceso hijo finalice su ejecución. En este manejador, se realiza un split de la variable wcSalida, que se encarga de dividir la cadena en un array de strings, para imprimirlo por pantalla correctamente. Para el caso de contar las palabras se realiza de la misma manera pero cambiando el argumento -l por -w, y para el caso de contar los caracteres se cambia el argumento -l por -c.
 
 ### Ejercicio 3
