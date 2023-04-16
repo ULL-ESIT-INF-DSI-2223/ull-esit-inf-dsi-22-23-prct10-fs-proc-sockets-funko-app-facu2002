@@ -1,0 +1,29 @@
+Para crear un funko:
+tsc --outDir dist && node dist/practica/ejercicio3/funko/index.js add --usuario "facundo" --id 2 --nombre "funkito" --descripcion "el mejor funko del mundo" --tipo "Pop" --genero "Animación" --franquicia "Mercadona" --numero 3 --exclusivo true --caracteristicas "Ninguna" --valor 20
+
+Para crear un funko en la base de datos de testeo:
+tsc --outDir dist && node dist/practica/ejercicio3/funko/index.js add --usuario "facundo" --id 2 --nombre "funkito" --descripcion "el mejor funko del mundo" --tipo "Pop" --genero "Animación" --franquicia "Mercadona" --numero 3 --exclusivo true --caracteristicas "Ninguna" --valor 20 --testing true
+
+Para eliminar un funko:
+tsc --outDir dist && node dist/practica/ejercicio3/funko/index.js remove --usuario "facundo" --id 2
+
+Para eliminar un funko en la base de datos de testeo:
+tsc --outDir dist && node dist/practica/ejercicio3/funko/index.js remove --usuario "facundo" --id 2 --testing true
+
+Para modificar un funko:
+tsc --outDir dist && node dist/practica/ejercicio3/funko/index.js update ???????????
+
+Para modificar un funko en la base de datos de testeo:
+tsc --outDir dist && node dist/practica/ejercicio3/funko/index.js update ???????????
+
+Para listar los funkos de un usuario:
+tsc --outDir dist && node dist/practica/ejercicio3/funko/index.js list --usuario "facundo"
+
+Para listar los funkos de un usuario de la base de datos de testeo:
+tsc --outDir dist && node dist/practica/ejercicio3/funko/index.js list --usuario "facundo" --testing true
+
+Para mostrar la información del funko de un usuario:
+tsc --outDir dist && node dist/practica/ejercicio3/funko/index.js read --usuario "facundo" --id 2
+
+Para mostrar la información del funko de un usuario de la base de datos de testeo:
+tsc --outDir dist && node dist/practica/ejercicio3/funko/index.js read --usuario "facundo" --id 2 --testing true
